@@ -15,6 +15,7 @@ They cover:
 ---
 
 ## 📌 Repository Structure
+```
 SQL-Revision-Notes/
 ├── README.md --> Full notes (This file)
 ├── chapters/
@@ -25,7 +26,7 @@ SQL-Revision-Notes/
 ├── easy.md
 ├── medium.md
 └── hard.md
-
+```
 ---
 
 ## 🚀 How to Use
