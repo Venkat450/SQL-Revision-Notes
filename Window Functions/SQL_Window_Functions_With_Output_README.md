@@ -216,4 +216,3 @@ FROM employees;
 
 ---
 
-Let me know if you'd like this added to your GitHub directly as part of your notes.
