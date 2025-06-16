@@ -16,12 +16,13 @@ An **anonymous block** is a block of PL/SQL code that:
 - Typically saved locally as `.sql` files if needed
 
 ### 📌 Example of an Anonymous Block
+```plsql
 DECLARE
   v_message VARCHAR2(50) := 'Hello from anonymous block';
 BEGIN
   DBMS_OUTPUT.PUT_LINE(v_message);
 END;
-
+```
 > ⚠️ Anonymous blocks are **not suitable** for large, reusable, or complex applications. For those, use **procedures or functions**.
 
 ---
