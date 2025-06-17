@@ -16,12 +16,13 @@ An **anonymous block** is a block of PL/SQL code that:
 - Typically saved locally as `.sql` files if needed
 
 ### 📌 Example of an Anonymous Block
+```plsql
 DECLARE
   v_message VARCHAR2(50) := 'Hello from anonymous block';
 BEGIN
   DBMS_OUTPUT.PUT_LINE(v_message);
 END;
-
+```
 > ⚠️ Anonymous blocks are **not suitable** for large, reusable, or complex applications. For those, use **procedures or functions**.
 
 ---
@@ -36,6 +37,7 @@ This procedure can accept input parameters, process logic, and optionally return
 ---
 
 ## 💾 Syntax: Creating a Procedure
+```plsql
 CREATE OR REPLACE PROCEDURE procedure_name (
     parameter1 [IN | OUT | IN OUT] datatype DEFAULT default_value,
     parameter2 [IN | OUT | IN OUT] datatype
@@ -47,7 +49,7 @@ BEGIN
 EXCEPTION
   -- Exception Handling
 END procedure_name;
-
+```
 - `IN`: Value passed **into** the procedure (read-only)
 - `OUT`: Value passed **back** from the procedure (write-only)
 - `IN OUT`: Value **passed in and modified**, then returned
@@ -74,6 +76,7 @@ END procedure_name;
 ---
 
 ## 🔪 Example: Procedure with IN OUT Mode
+```plsql
 CREATE OR REPLACE PROCEDURE ADD_CUSTOMER(
     c_id         IN OUT NUMBER,
     c_fname      IN VARCHAR2,
@@ -101,7 +104,8 @@ BEGIN
   COMMIT;
   DBMS_OUTPUT.PUT_LINE('Data successfully inserted.');
 END ADD_CUSTOMER;
-
+```
+```plsql
 ### ▶️ Calling the IN OUT Procedure
 DECLARE
   tcount NUMBER := 45;
@@ -120,7 +124,7 @@ BEGIN
   );
   DBMS_OUTPUT.PUT_LINE('Total records = ' || tcount);
 END;
-
+```
 > 🔄 The same `c_id` variable is used to send a value **into** the procedure and then **receive a new value** (total customer count) back.
 
 ---
@@ -155,6 +159,7 @@ Functions can also be used **inside SQL expressions**, unlike procedures.
 ---
 
 ## 📄 Syntax: Creating a Function
+```plsql
 CREATE OR REPLACE FUNCTION function_name (
   parameter1 [IN | OUT | IN OUT] datatype
 )
@@ -167,7 +172,8 @@ BEGIN
 END function_name;
 
 ---
-
+```
+```plsql
 ## 🔪 Example: Function to Count Sales on a Given Date
 CREATE OR REPLACE FUNCTION find_salescount (
   p_sales_date IN DATE
@@ -181,7 +187,7 @@ BEGIN
 
   RETURN number_of_sales;
 END find_salescount;
-
+```
 Once compiled, the function is stored in the database. You can view it under the **Functions** section in SQL Developer.
 
 > 📌 Just like procedures, functions use parameter modes (`IN`, `OUT`, `IN OUT`) but always return a value.
@@ -191,9 +197,12 @@ Once compiled, the function is stored in the database. You can view it under the
 ## ▶️ Calling a Function
 
 ### 1. Inside a SQL Statement
+```sql
 SELECT find_salescount(DATE '2024-01-01') FROM dual;
+```
 > You can call functions in SQL queries—**not procedures**.
 
+```plsql
 ### 2. Inside a PL/SQL Block
 DECLARE
   scount NUMBER := 0;
@@ -201,5 +210,5 @@ BEGIN
   scount := find_salescount(DATE '2024-01-01');
   DBMS_OUTPUT.PUT_LINE(scount);
 END;
-
+```
 > 🌟 Use functions when you need to return a single value and want to include the call in SQL expressions.
